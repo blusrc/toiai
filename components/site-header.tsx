@@ -1,6 +1,5 @@
-import { LogIn } from "lucide-react"
-
 import { siteConfig } from "@/config/site"
+import { Icons } from "@/components/icons"
 import { MainNav } from "@/components/main-nav"
 import { ThemeToggle } from "@/components/theme-toggle"
 
@@ -14,7 +13,7 @@ export function SiteHeader() {
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-3">
             <Button size="sm">
-              <LogIn className="mr-2 h-4 w-4" />
+              <Icons.login className="mr-2 h-4 w-4" />
               Кіру
             </Button>
             {/* <Link

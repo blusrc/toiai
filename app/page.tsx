@@ -1,19 +1,9 @@
-import { Button } from "@/components/ui/button"
+import { HeroSection } from "@/components/hero-section"
 
 export default function IndexPage() {
   return (
     <section className="container grid items-center gap-6 pb-8 pt-36 md:pd-10">
-      <div className="flex flex-col justify-center sm:items-center gap-4">
-        <h1 className="text-3xl font-black leading-tight md:text-4xl uppercase">
-          Заманауи онлайн шақыртулар
-        </h1>
-        <p className="text-lg text-muted-foreground sm:text-center">
-          Жасанды зият қуатымен қайталанбас
-          <br />
-          шақырту қағаздарын шығарыңыз
-        </p>
-        <Button className="">Шығара бастау</Button>
-      </div>
+      <HeroSection />
       {/* <div className="flex max-w-[980px] flex-col items-start gap-2">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
           Beautifully designed components <br className="hidden sm:inline" />
