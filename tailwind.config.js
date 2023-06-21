@@ -65,8 +65,20 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
+        "typewriter": {
+          from: { width: 0 },
+        },
+        "changeWord": {
+          "0%, 20%": {
+            opacity: 0,
+          },
+          "25%, 100%": {
+            opacity: 1,
+          },
+        },
       },
       animation: {
+        "type": "typwriter typewriter 4s steps(40) 1s infinite, changeWord 4s ease-in-out infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
