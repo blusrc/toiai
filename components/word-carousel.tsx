@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-const words = ["Заманауи", "Ерекше", "Оңай", "Қайталанбас"]
+const words = ["Заманауи", "Ерекше", "Оңай", "Әдемі"]
 
 const WordCarousel: React.FC = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0)

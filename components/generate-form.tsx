@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Popover, PopoverTrigger } from "@radix-ui/react-popover"
 import { Check, ChevronsUpDown } from "lucide-react"
-import { useForm } from "react-hook-form"
+import { useFieldArray, useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { cn } from "@/lib/utils"
@@ -35,6 +35,11 @@ const formSchema = z.object({
   language: z.string({
     required_error: "Той түрін таңдаңыз",
   }),
+  urls: z.array(
+    z.object({
+      value: z.string().url({ message: "Please enter a valid URL." }),
+    })
+  ),
 })
 
 const languages = [
@@ -56,7 +61,13 @@ export function GenerateForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
+      urls: [{ value: "" }],
     },
+  })
+
+  const { fields, append } = useFieldArray({
+    name: "urls",
+    control: form.control,
   })
 
   // 2. Define a submit handler.
@@ -75,20 +86,38 @@ export function GenerateForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Той кімге арналған</FormLabel>
-              <FormControl>
-                <Input placeholder="Арман мен Айым" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div>
+          {fields.map((field, index) => (
+            <FormField
+              control={form.control}
+              key={field.id}
+              name={`urls.${index}.value`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className={cn(index !== 0 && "sr-only")}>
+                    URLs
+                  </FormLabel>
+                  <FormDescription className={cn(index !== 0 && "sr-only")}>
+                    Add links to your website, blog, or social media profiles.
+                  </FormDescription>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          ))}
+          <Button
+            type="button"
+            variant="link"
+            size="sm"
+            className="mt-1"
+            onClick={() => append({ value: "" })}
+          >
+            Add URL
+          </Button>{" "}
+        </div>
         <FormField
           control={form.control}
           name="language"
